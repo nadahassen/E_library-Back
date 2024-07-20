@@ -1,8 +1,6 @@
 package tn.esprit.library.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +15,7 @@ import java.sql.Struct;
 @AllArgsConstructor
 public class Document {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_document;
 
     private String path;
