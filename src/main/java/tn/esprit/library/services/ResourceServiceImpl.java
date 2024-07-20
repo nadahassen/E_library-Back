@@ -29,8 +29,8 @@ public class ResourceServiceImpl implements IResourceService {
     }
 
     @Override
-    public Optional<Resource> retrieveResource(Long id_resource) {
-        return resourceRepository.findById(id_resource);
+    public Resource retrieveResource(Long id_resource) {
+        return resourceRepository.findById(id_resource).get();
     }
 
     @Override

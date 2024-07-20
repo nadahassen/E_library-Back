@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface IResourceService {
     public List<Resource> retrieveAllResources();
 
-    public Optional<Resource> retrieveResource(Long id_resource);
+    public Resource retrieveResource(Long id_resource);
 
     public Resource addResource(Resource r);
 
