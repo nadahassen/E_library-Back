@@ -42,6 +42,10 @@ public class ResourceServiceImpl implements IResourceService {
 
     @Override
     public Resource affecterDocumentaResource(Resource r, Document d) {
-        return null;
+        List<Document> x;
+        x = r.getDocuments();
+        x.add(d);
+        r.setDocuments(x);
+        return r ;
     }
 }
