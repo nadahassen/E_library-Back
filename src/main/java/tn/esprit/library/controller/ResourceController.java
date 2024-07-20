@@ -30,4 +30,13 @@ public class ResourceController {
     @DeleteMapping("/delete/{idr}")
     public  void removeResource(@PathVariable("idr")Long id_resource){ resourceService.removeResource(id_resource); }
 
+    @PutMapping("/affectresourcedocument/{idd}")
+    public  Resource affectResourceDocument(@RequestBody Resource r,@PathVariable("idd")Long id_document){
+        return resourceService.affecterDocumentaResource(r,id_document);}
+
+    @PutMapping("/affectresourcedocument/{ids}")
+    public  Resource affectsubjectresource(@RequestBody Resource r,@PathVariable("ids")Long id_subject){
+        return resourceService.affecterSubjectResource(r,id_subject);}
+
+
 }
