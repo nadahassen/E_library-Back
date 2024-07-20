@@ -51,27 +51,29 @@ public class ResourceServiceImpl implements IResourceService {
 
     @Override
     public Resource affecterDocumentaResource(Resource r, Long id_document) {
-        Document docu = new Document();
-        Optional<Document> doc = documentRepository.findById(id_document);
-        if (doc.isPresent()){
-            docu = doc.get();
-        }
+
+        Document doc = documentRepository.findById(id_document).get();
         List<Document> x;
         x = r.getDocuments();
-        x.add(docu);
+
+        x.add(doc);
         r.setDocuments(x);
+        doc.setResource(r);
+        documentRepository.save(doc);
+        resourceRepository.save(r);
+
         return r ;
     }
 
     @Override
     public Resource affecterSubjectResource(Resource r, Long id_subject) {
-        Subject suj = new Subject();
-        Optional<Subject> sub = subjectRepository.findById(id_subject);
-        if(sub.isPresent()){
-            suj = sub.get();
-
-        }
-        r.setSubject(suj);
+        Subject sub = subjectRepository.findById(id_subject).get();
+        List<Resource> l = sub.getResourceList();
+        l.add(r);
+        sub.setResourceList(l);
+        r.setSubject(sub);
+        subjectRepository.save(sub);
+        resourceRepository.save(r);
         return r;
     }
 }
