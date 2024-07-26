@@ -1,5 +1,5 @@
 package tn.esprit.library.entities;
 
 public enum Typedocument {
-    TD,Examen
+    PNG,PDF,JPEG,JPG
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -16,13 +17,15 @@ import java.util.List;
 public class Resource {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_resourcce;
+    private Long id_resource;
 
     private String title;
 
+    @Enumerated(EnumType.STRING)
     private Specialty specialty;
 
-    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.PENDING;;
 
     @ManyToOne
     private User upload;
@@ -33,7 +36,15 @@ public class Resource {
     @ManyToOne
     private Subject subject;
 
-    @OneToMany(mappedBy = "resource")
-    private List<Document> documents;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "resource_images",
+    joinColumns = {
+            @JoinColumn(name = "id_resource")
+    },
+            inverseJoinColumns = {
+            @JoinColumn(name = "id_image")
+            }
+    )
+    private Set<ImageModel> resourceImages;
 
 }

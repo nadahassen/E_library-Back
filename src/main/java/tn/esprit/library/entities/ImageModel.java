@@ -6,23 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Struct;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Document {
+@Table(name = "image_model")
+public class ImageModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_document;
+    private Long id_image;
 
     private String path;
 
-    private Typedocument typedocument;
+    private String type;
 
-    @ManyToOne
-    private Resource resource;
+    @Column(length = 5000000)
+    private byte[] picByte;
 
+    public ImageModel(String path, String type, byte[] picByte) {
+        this.path = path;
+        this.type = type;
+        this.picByte = picByte;
+    }
 }
