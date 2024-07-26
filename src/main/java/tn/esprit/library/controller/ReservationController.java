@@ -16,7 +16,9 @@ public class ReservationController {
     IReservationService reservationService;
 
     @PostMapping("/add")
-    public Reservation addReservation(@RequestBody Reservation reservation){return reservationService.addReservation(reservation); }
+    public Reservation addReservation(@RequestBody Reservation reservation){
+        return reservationService.addReservation(reservation);
+    }
 
     @GetMapping("/getall")
     public List<Reservation> getAllReservation(){return reservationService.getAllReservations(); }

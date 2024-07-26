@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,4 +33,9 @@ public class Book {
 
     @OneToMany(mappedBy="book")
     private List<Reservation> reservations;
+
+
+    public String getName() {
+        return name;
+    }
 }
