@@ -49,4 +49,7 @@ public class User {
 
     @OneToMany(mappedBy = "approve")
     private List<Resource> resources_approved;
+
+
 }
+
