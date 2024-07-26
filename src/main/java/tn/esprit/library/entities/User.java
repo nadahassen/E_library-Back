@@ -1,5 +1,6 @@
 package tn.esprit.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_user;
@@ -30,20 +32,21 @@ public class User {
 
     private Specialty specialty;
 
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     private String image;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Notification> notificationlist;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy = "user")
     private List<Reservation> reservationlist;
 
-    @OneToMany(mappedBy="upload")
+    @OneToMany(mappedBy = "upload")
     private List<Resource> resources_uploaded;
 
-    @OneToMany(mappedBy="approve")
+    @OneToMany(mappedBy = "approve")
     private List<Resource> resources_approved;
-
 }
