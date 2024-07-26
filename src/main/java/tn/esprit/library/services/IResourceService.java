@@ -1,11 +1,13 @@
 package tn.esprit.library.services;
 
-import tn.esprit.library.entities.Document;
+import org.springframework.web.multipart.MultipartFile;
+import tn.esprit.library.entities.ImageModel;
 import tn.esprit.library.entities.Resource;
-import tn.esprit.library.entities.Subject;
+import tn.esprit.library.entities.User;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 public interface IResourceService {
     public List<Resource> retrieveAllResources();
@@ -18,7 +20,16 @@ public interface IResourceService {
 
     public Resource modifyResource(Resource r);
 
+    /*
     public Resource affecterDocumentaResource(Resource r, Long id_document);
 
     public Resource affecterSubjectResource(Resource r, Long id_sujet);
+
+     */
+    Set<ImageModel> uploadImage(MultipartFile[] multipartFiles) throws IOException;
+
+    Resource addResourceWithImages(Resource resource, MultipartFile[] files) throws IOException;
+
+    User findUserById(Long userId); // Add this method
+
 }
