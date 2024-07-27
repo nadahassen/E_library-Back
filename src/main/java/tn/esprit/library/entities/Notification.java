@@ -1,5 +1,6 @@
 package tn.esprit.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,6 @@ public class Notification {
     private Date date;
 
     @ManyToOne
-    private  User user;
-
+    @JsonBackReference
+    private User user;
 }
