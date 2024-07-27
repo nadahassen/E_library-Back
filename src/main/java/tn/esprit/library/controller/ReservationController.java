@@ -34,4 +34,6 @@ public class ReservationController {
 
     @DeleteMapping("/delete/{idr}")
     public  void deleteReservation(@PathVariable("idr")Long id_reservation){ reservationService.deleteReservation(id_reservation); }
+
+    //na9sa modify reservation
 }

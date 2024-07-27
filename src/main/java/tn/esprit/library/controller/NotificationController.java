@@ -20,7 +20,7 @@ public class NotificationController {
         return notificationService.retrieveAllNotifications();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")//3 methods path overlap
     public ResponseEntity<Notification> retrieveNotification(@PathVariable("id") Long id_notification) {
         Notification notification = notificationService.retrieveNotification(id_notification);
         if (notification != null) {
@@ -30,7 +30,7 @@ public class NotificationController {
         }
     }
 
-    @PostMapping
+    @PostMapping//na9es el path
     public Notification addNotification(@RequestBody Notification notification) {
         return notificationService.addNotification(notification);
     }
