@@ -1,7 +1,6 @@
 package tn.esprit.library.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.usertype.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,17 +50,13 @@ public class ResourceController {
         // Set the uploader of the resource
         resource.setUpload(user);
 
-
-
-        ///////////////////// affectation sulbject ressource (testa3mel el ids fel lien)//////////////////////////
+        // Affectation subject resource (using the ids in the path)
         Subject subject = subjectService.retrieveSubject(id_subject);
         List<Resource> lr = subject.getResourceList();
         lr.add(resource);
         subject.setResourceList(lr);
         subjectService.modifySubject(subject);
         resource.setSubject(subject);
-        ////////////////////////////////////////////////////////////////////////////////////
-
 
         Resource savedResource;
         try {
@@ -80,11 +75,6 @@ public class ResourceController {
 
             notificationService.addNotification(notification);
         }
-
-
-
-
-
 
         return ResponseEntity.ok(savedResource);
     }
