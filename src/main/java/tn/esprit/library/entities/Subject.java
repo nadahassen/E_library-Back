@@ -1,5 +1,6 @@
 package tn.esprit.library.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Subject {
     private int grade;
 
     @OneToMany(mappedBy ="subject" )
+    @JsonBackReference // Manage the back reference
     private List<Resource> resourceList;
 
 }

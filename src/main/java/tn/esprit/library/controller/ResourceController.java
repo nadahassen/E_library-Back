@@ -1,17 +1,14 @@
 package tn.esprit.library.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.usertype.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import tn.esprit.library.entities.Notification;
-import tn.esprit.library.entities.Resource;
-import tn.esprit.library.entities.Type;
-import tn.esprit.library.entities.User;
+import tn.esprit.library.entities.*;
 import tn.esprit.library.services.INotificationService;
 import tn.esprit.library.services.IResourceService;
+import tn.esprit.library.services.ISubjectService;
 
 import java.io.IOException;
 import java.util.Date;
@@ -26,11 +23,15 @@ public class ResourceController {
     @Autowired
     private INotificationService notificationService;
 
-    @PostMapping(value = "/add", consumes = { "multipart/form-data" })
+    @Autowired
+    private ISubjectService subjectService;
+
+    @PostMapping(value = "/add/{ids}", consumes = { "multipart/form-data" })
     public ResponseEntity<?> createResource(
             @RequestPart("resource") String resourceJson,
             @RequestPart("imageFile") MultipartFile[] imageFiles,
-            @RequestParam("userId") Long userId) {
+            @RequestParam("userId") Long userId,
+            @PathVariable("ids") Long id_subject) {
 
         ObjectMapper mapper = new ObjectMapper();
         Resource resource;
@@ -48,6 +49,14 @@ public class ResourceController {
 
         // Set the uploader of the resource
         resource.setUpload(user);
+
+        // Affectation subject resource (using the ids in the path)
+        Subject subject = subjectService.retrieveSubject(id_subject);
+        List<Resource> lr = subject.getResourceList();
+        lr.add(resource);
+        subject.setResourceList(lr);
+        subjectService.modifySubject(subject);
+        resource.setSubject(subject);
 
         Resource savedResource;
         try {
