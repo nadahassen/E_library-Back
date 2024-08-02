@@ -9,12 +9,14 @@ import tn.esprit.library.services.INotificationService;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/notifications")
 public class NotificationController {
 
     @Autowired
     INotificationService notificationService;
 
+    @CrossOrigin
     @GetMapping
     public List<Notification> retrieveAllNotifications() {
         return notificationService.retrieveAllNotifications();

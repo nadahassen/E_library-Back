@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/resource")
 public class ResourceController {
     @Autowired
@@ -79,6 +80,7 @@ public class ResourceController {
         return ResponseEntity.ok(savedResource);
     }
 
+    @CrossOrigin
     @GetMapping("/getall")
     public List<Resource> retrieveAllResources() {
         return resourceService.retrieveAllResources();

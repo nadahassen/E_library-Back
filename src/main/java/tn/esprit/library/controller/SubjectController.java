@@ -17,6 +17,9 @@ public class SubjectController {
     @Autowired
     SubjectServiceImpl subjectService;
 
+
+    @PostMapping("/add")
+    public  Subject addsubject(@RequestBody Subject s){return subjectService.addSubject(s) ;}
     @GetMapping("/getall")
     public List<Subject> getallsubjects(){return subjectService.retrieveAllSubjects();}
 
