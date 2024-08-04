@@ -9,8 +9,8 @@ import tn.esprit.library.services.INotificationService;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/notifications")
+@CrossOrigin(origins = "http://localhost:4200") // Allow specific origin
 public class NotificationController {
 
     @Autowired

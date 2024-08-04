@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/book")
+@CrossOrigin(origins = "http://localhost:4200") // Allow specific origin
 public class BookController {
     @Autowired
     IBookService bookService;

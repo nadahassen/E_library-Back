@@ -24,6 +24,9 @@ public class Subject {
 
     private int grade;
 
+    @Enumerated(EnumType.STRING)
+    private Specialty spec;
+
     @OneToMany(mappedBy ="subject" )
     @JsonBackReference // Manage the back reference
     private List<Resource> resourceList;

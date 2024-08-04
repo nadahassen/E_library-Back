@@ -21,8 +21,8 @@ public class Resource {
 
     private String title;
 
-    @Enumerated(EnumType.STRING)
-    private Specialty specialty;
+  //  @Enumerated(EnumType.STRING)
+ //   private Specialty specialty;
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.PENDING;;
