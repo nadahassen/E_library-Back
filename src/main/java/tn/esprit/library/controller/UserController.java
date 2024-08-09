@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:4200") // Allow specific origin
-
 public class UserController {
     IUserService userService;
     @PostMapping("/add")

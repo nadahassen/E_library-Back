@@ -43,8 +43,10 @@ public class ResourceServiceImpl implements IResourceService {
         resourceRepository.deleteById(id_resource);
     }
 
-    @Override
     public Resource modifyResource(Resource r) {
+        if (r.getId_resource() == null) {
+            throw new IllegalArgumentException("Resource ID cannot be null");
+        }
         return resourceRepository.save(r);
     }
 

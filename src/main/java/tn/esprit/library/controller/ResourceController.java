@@ -2,6 +2,7 @@ package tn.esprit.library.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,12 +92,23 @@ public class ResourceController {
     }
 
     @PutMapping("/modify")
-    public Resource modifyResource(@RequestBody Resource r) {
-        return resourceService.modifyResource(r);
+    public ResponseEntity<Resource> modifyResource(@RequestBody Resource r) {
+        try {
+            if (r == null || r.getId_resource() == null) {
+                return ResponseEntity.badRequest().build();
+            }
+            Resource updatedResource = resourceService.modifyResource(r);
+            return ResponseEntity.ok(updatedResource);
+        } catch (Exception e) {
+            e.printStackTrace();  // Log the exception
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @DeleteMapping("/delete/{idr}")
     public void removeResource(@PathVariable("idr") Long id_resource) {
         resourceService.removeResource(id_resource);
     }
+
+
 }
