@@ -1,3 +1,4 @@
+
 package tn.esprit.library.controller;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +13,6 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200") // Allow specific origin
 public class UserController {
     IUserService userService;
     @PostMapping("/add")
@@ -43,6 +43,7 @@ public class UserController {
         return generateToken(u.getId_user());
     }
     private String generateToken(Long userId) {
+        User u=userService.getUserById(userId);
         long timestamp = System.currentTimeMillis();
         String key = "1a2fac207899e0a0e16d01c428feedcbc2b93513f8f8576d93ddf5411582c3df";  // Use a secure key in real scenarios
 
@@ -50,6 +51,7 @@ public class UserController {
                 .setIssuedAt(new Date(timestamp))
                 .setExpiration(new Date(timestamp + 900000))
                 .claim("userId", userId.toString())
+                .claim("role",u.getType())
                 .compact();
     }
 }

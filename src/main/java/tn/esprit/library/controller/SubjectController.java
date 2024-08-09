@@ -34,5 +34,4 @@ public class SubjectController {
     @DeleteMapping("/del/{id}")
     public void deletesubject(@PathVariable("id")Long id){ subjectService.removeSubject(id);  }
 
-
 }
