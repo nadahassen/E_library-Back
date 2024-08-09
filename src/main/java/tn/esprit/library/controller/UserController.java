@@ -1,4 +1,3 @@
-
 package tn.esprit.library.controller;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +12,6 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200") // Allow requests from Angular app
 public class UserController {
     IUserService userService;
     @PostMapping("/add")
