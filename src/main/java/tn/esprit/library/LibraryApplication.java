@@ -2,10 +2,11 @@ package tn.esprit.library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-public class LibraryApplication { // Fixed the class declaration formatting issue
-
+@EnableScheduling
+public class LibraryApplication {
     public static void main(String[] args) {
         SpringApplication.run(LibraryApplication.class, args);
     }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.library.entities.Book;
 import tn.esprit.library.entities.Reservation;
+import tn.esprit.library.entities.ReservationDTO;
 import tn.esprit.library.services.IBookService;
 import tn.esprit.library.services.IReservationService;
 
@@ -22,7 +23,7 @@ public class ReservationController {
     }
 
     @GetMapping("/getall")
-    public List<Reservation> getAllReservation(){return reservationService.getAllReservations(); }
+    public List<ReservationDTO> getAllReservation(){return reservationService.getAllReservations(); }
 
     @GetMapping("/getByBook/{idb}")
     public List<Reservation> getReservationsByBook(@PathVariable("idb")Long id_book){return reservationService.getReservationsByBook(id_book); }
@@ -35,6 +36,12 @@ public class ReservationController {
 
     @DeleteMapping("/delete/{idr}")
     public  void deleteReservation(@PathVariable("idr")Long id_reservation){ reservationService.deleteReservation(id_reservation); }
+
+    @PutMapping("/update")
+    public Reservation updateReservation(@RequestBody Reservation reservation) {
+        return reservationService.updateReservation(reservation);
+
+    }
 
     //na9sa modify reservation
 }
