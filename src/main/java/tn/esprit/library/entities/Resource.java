@@ -21,8 +21,8 @@ public class Resource {
 
     private String title;
 
-    @Enumerated(EnumType.STRING)
-    private Specialty specialty;
+    //  @Enumerated(EnumType.STRING)
+    //   private Specialty specialty;
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.PENDING;;
@@ -38,11 +38,11 @@ public class Resource {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "resource_images",
-    joinColumns = {
-            @JoinColumn(name = "id_resource")
-    },
+            joinColumns = {
+                    @JoinColumn(name = "id_resource")
+            },
             inverseJoinColumns = {
-            @JoinColumn(name = "id_image")
+                    @JoinColumn(name = "id_image")
             }
     )
     private Set<ImageModel> resourceImages;
