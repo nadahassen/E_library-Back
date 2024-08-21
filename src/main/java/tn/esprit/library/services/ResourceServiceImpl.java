@@ -5,10 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.library.entities.ImageModel;
 import tn.esprit.library.entities.Resource;
+import tn.esprit.library.entities.User;
 import tn.esprit.library.repository.IResourceRepository;
 import tn.esprit.library.repository.IUserRepository;
-import tn.esprit.library.entities.User;
-
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -44,8 +43,10 @@ public class ResourceServiceImpl implements IResourceService {
         resourceRepository.deleteById(id_resource);
     }
 
-    @Override
     public Resource modifyResource(Resource r) {
+        if (r.getId_resource() == null) {
+            throw new IllegalArgumentException("Resource ID cannot be null");
+        }
         return resourceRepository.save(r);
     }
 

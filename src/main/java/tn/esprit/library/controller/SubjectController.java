@@ -12,10 +12,15 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/subject")
+@CrossOrigin(origins = "http://localhost:4200") // Allow specific origin
 public class SubjectController {
 
     @Autowired
     SubjectServiceImpl subjectService;
+
+
+    @PostMapping("/add")
+    public  Subject addsubject(@RequestBody Subject s){return subjectService.addSubject(s) ;}
 
     @GetMapping("/getall")
     public List<Subject> getallsubjects(){return subjectService.retrieveAllSubjects();}
@@ -28,6 +33,5 @@ public class SubjectController {
 
     @DeleteMapping("/del/{id}")
     public void deletesubject(@PathVariable("id")Long id){ subjectService.removeSubject(id);  }
-
 
 }

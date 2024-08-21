@@ -10,11 +10,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notifications")
+@CrossOrigin(origins = "http://localhost:4200") // Allow specific origin
 public class NotificationController {
 
     @Autowired
     INotificationService notificationService;
 
+    @CrossOrigin
     @GetMapping
     public List<Notification> retrieveAllNotifications() {
         return notificationService.retrieveAllNotifications();

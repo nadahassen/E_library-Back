@@ -52,4 +52,5 @@ public class User {
     private List<Resource> resources_approved;
 
     // Additional fields and methods if necessary
+
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reservation")
-@CrossOrigin(origins = "http://localhost:4200") // Allow requests from Angular app
+@CrossOrigin(origins = "http://localhost:4200") // Allow specific origin
 public class ReservationController {
     @Autowired
     IReservationService reservationService;
