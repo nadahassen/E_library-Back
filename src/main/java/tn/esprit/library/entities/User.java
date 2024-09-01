@@ -21,19 +21,20 @@ public class User {
     private String password;
 
     private String mail;
-
+    private String phone;
     private String firstname;
 
     private String lastname;
 
     private int priority;
-
+    @Enumerated(EnumType.STRING)
     private Specialty specialty;
-
+    @Enumerated(EnumType.STRING)
     private Type type;
-
     private String image;
+    @Enumerated(EnumType.STRING)
     private Status state;
+    private String sexe;
     @OneToMany(mappedBy="user")
     private List<Notification> notificationlist;
 
