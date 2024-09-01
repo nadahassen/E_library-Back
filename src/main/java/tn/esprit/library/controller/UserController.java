@@ -11,7 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import static tn.esprit.library.entities.Status.Approved;
+import static tn.esprit.library.entities.Status.APPROVED;
+
 
 @RestController
 @AllArgsConstructor
@@ -61,7 +62,7 @@ public class UserController {
     @PutMapping("/accept/{id}")
    public User acceptUser(@PathVariable("id") Long id){
         User u=userService.getUserById(id);
-        u.setState(Approved);
+        u.setState(APPROVED);
         String subject="Your E-Library Account is Now Active - Welcome Aboard!";
         String text="Dear "+u.getFirstname()+" "+u.getLastname()+","
                 +"\n"
