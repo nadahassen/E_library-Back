@@ -3,7 +3,11 @@ package tn.esprit.library.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.library.entities.User;
+
 import tn.esprit.library.repository.IUserRepository;
+
+import tn.esprit.library.repository.IUserRepository;
+
 import tn.esprit.library.services.IUserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,9 +18,15 @@ import java.util.Random;
 import static tn.esprit.library.entities.Status.APPROVED;
 
 
+import java.util.Random;
+
+import static tn.esprit.library.entities.Status.APPROVED;
+
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     IUserService userService;
     IUserRepository userRepository;

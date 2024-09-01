@@ -1,4 +1,6 @@
 package tn.esprit.library.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,9 +21,11 @@ public class User {
     private Long id_user;
 
     private String password;
+    private String phone;
+
+    private String sexe;
 
     private String mail;
-    private String phone;
     private String firstname;
 
     private String lastname;
@@ -29,12 +33,12 @@ public class User {
     private int priority;
     @Enumerated(EnumType.STRING)
     private Specialty specialty;
+
     @Enumerated(EnumType.STRING)
     private Type type;
     private String image;
     @Enumerated(EnumType.STRING)
     private Status state;
-    private String sexe;
     @OneToMany(mappedBy="user")
     private List<Notification> notificationlist;
 
@@ -43,8 +47,8 @@ public class User {
 
     @OneToMany(mappedBy="upload")
     private List<Resource> resources_uploaded;
-
-    @OneToMany(mappedBy="approve")
+    @OneToMany(mappedBy = "approve")
+    @JsonBackReference(value = "approve-reference")
     private List<Resource> resources_approved;
 
 }
