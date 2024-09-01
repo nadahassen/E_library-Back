@@ -11,4 +11,5 @@ public interface IUserService {
     public User updateUser(User user);
     public void deleteUser(Long id);
     public User checkProfile(String mail,String pass);
+    public void sendSimpleMessage(String to, String subject, String text);
 }
