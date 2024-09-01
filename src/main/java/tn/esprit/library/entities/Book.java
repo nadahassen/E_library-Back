@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Base64;
+
 import java.util.List;
 
 @Entity
@@ -35,10 +36,11 @@ public class Book {
 
     private boolean available;
 
-    private String imageUrl; // New field for the image URL
 
     @OneToMany(mappedBy="book")
     private List<Reservation> reservations;
+    private String imageUrl; // New field for the image URL
+
 
 
 
@@ -87,4 +89,5 @@ public class Book {
         byte[] fileContent = Files.readAllBytes(imgFile.toPath());
         return Base64.getEncoder().encodeToString(fileContent);
     }
+
 }

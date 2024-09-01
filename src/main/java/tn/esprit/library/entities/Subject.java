@@ -1,6 +1,8 @@
 package tn.esprit.library.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +26,8 @@ public class Subject {
 
     private int grade;
 
+
+
     @Enumerated(EnumType.STRING)
     private Specialty spec;
 
@@ -32,3 +36,4 @@ public class Subject {
     private List<Resource> resourceList;
 
 }
+

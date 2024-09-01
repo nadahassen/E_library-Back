@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
 import java.util.Set;
+
 
 @Entity
 @Getter
@@ -37,6 +39,12 @@ public class Resource {
     @ManyToOne
     private Subject subject;
 
+
+    @OneToMany(mappedBy = "resource")
+    private List<Document> documents;
+
+
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "resource_images",
             joinColumns = {
@@ -49,3 +57,4 @@ public class Resource {
     private Set<ImageModel> resourceImages;
 
 }
+

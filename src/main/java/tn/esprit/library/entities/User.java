@@ -1,7 +1,7 @@
 package tn.esprit.library.entities;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,36 +21,34 @@ public class User {
     private Long id_user;
 
     private String password;
+    private String phone;
+
+    private String sexe;
+
     private String mail;
     private String firstname;
+
     private String lastname;
+
     private int priority;
+    @Enumerated(EnumType.STRING)
     private Specialty specialty;
 
     @Enumerated(EnumType.STRING)
     private Type type;
-
     private String image;
-
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @Enumerated(EnumType.STRING)
+    private Status state;
+    @OneToMany(mappedBy="user")
     private List<Notification> notificationlist;
 
-    private Status state;
-
-
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @OneToMany(mappedBy="user")
     private List<Reservation> reservationlist;
 
-    @OneToMany(mappedBy = "upload")
-    @JsonBackReference(value = "upload-reference") // Back reference for upload
+    @OneToMany(mappedBy="upload")
     private List<Resource> resources_uploaded;
-
     @OneToMany(mappedBy = "approve")
-    @JsonBackReference(value = "approve-reference") // Back reference for upload
+    @JsonBackReference(value = "approve-reference")
     private List<Resource> resources_approved;
-
-    // Additional fields and methods if necessary
 
 }
