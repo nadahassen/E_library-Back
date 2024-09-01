@@ -2,27 +2,27 @@ package tn.esprit.library.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.library.entities.Document;
+import org.springframework.web.multipart.MultipartFile;
+import tn.esprit.library.entities.ImageModel;
 import tn.esprit.library.entities.Resource;
-import tn.esprit.library.entities.Subject;
-import tn.esprit.library.repository.IDocumentRepository;
+import tn.esprit.library.entities.User;
 import tn.esprit.library.repository.IResourceRepository;
-import tn.esprit.library.repository.ISubjectRepository;
+import tn.esprit.library.repository.IUserRepository;
 
-import javax.print.Doc;
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ResourceServiceImpl implements IResourceService {
 
     @Autowired
     IResourceRepository resourceRepository;
+
     @Autowired
-    IDocumentRepository documentRepository;
-    
-    @Autowired
-    ISubjectRepository subjectRepository;
+    private IUserRepository userRepository;
+
     @Override
     public List<Resource> retrieveAllResources() {
         return resourceRepository.findAll();
@@ -30,7 +30,7 @@ public class ResourceServiceImpl implements IResourceService {
 
     @Override
     public Resource retrieveResource(Long id_resource) {
-        return resourceRepository.findById(id_resource).get();
+        return resourceRepository.findById(id_resource).orElse(null);
     }
 
     @Override
@@ -41,39 +41,37 @@ public class ResourceServiceImpl implements IResourceService {
     @Override
     public void removeResource(Long id_resource) {
         resourceRepository.deleteById(id_resource);
-
     }
 
-    @Override
     public Resource modifyResource(Resource r) {
+        if (r.getId_resource() == null) {
+            throw new IllegalArgumentException("Resource ID cannot be null");
+        }
         return resourceRepository.save(r);
     }
 
     @Override
-    public Resource affecterDocumentaResource(Resource r, Long id_document) {
-
-        Document doc = documentRepository.findById(id_document).get();
-        List<Document> x;
-        x = r.getDocuments();
-
-        x.add(doc);
-        r.setDocuments(x);
-        doc.setResource(r);
-        documentRepository.save(doc);
-        resourceRepository.save(r);
-
-        return r ;
+    public Set<ImageModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
+        Set<ImageModel> imageModels = new HashSet<>();
+        for (MultipartFile file : multipartFiles) {
+            String originalFilename = file.getOriginalFilename();
+            String contentType = file.getContentType();
+            byte[] bytes = file.getBytes();
+            ImageModel imageModel = new ImageModel(originalFilename, contentType, bytes);
+            imageModels.add(imageModel);
+        }
+        return imageModels;
     }
 
     @Override
-    public Resource affecterSubjectResource(Resource r, Long id_subject) {
-        Subject sub = subjectRepository.findById(id_subject).get();
-        List<Resource> l = sub.getResourceList();
-        l.add(r);
-        sub.setResourceList(l);
-        r.setSubject(sub);
-        subjectRepository.save(sub);
-        resourceRepository.save(r);
-        return r;
+    public Resource addResourceWithImages(Resource resource, MultipartFile[] files) throws IOException {
+        Set<ImageModel> images = uploadImage(files);
+        resource.setResourceImages(images);
+        return resourceRepository.save(resource);
+    }
+
+    @Override
+    public User findUserById(Long userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 }

@@ -2,9 +2,8 @@ package tn.esprit.library.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import tn.esprit.library.entities.Resource;
+import tn.esprit.library.entities.ImageModel;
 
 @Repository
-public interface IResourceRepository extends JpaRepository<Resource,Long> {
-
+public interface IImageModelRepository extends JpaRepository<ImageModel,Long> {
 }
