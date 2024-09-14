@@ -26,7 +26,6 @@ import static tn.esprit.library.entities.Status.APPROVED;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     IUserService userService;
     IUserRepository userRepository;
