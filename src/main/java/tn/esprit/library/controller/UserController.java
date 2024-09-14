@@ -26,6 +26,7 @@ import static tn.esprit.library.entities.Status.APPROVED;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin(origins = "*") // Allow requests from Angular app
 public class UserController {
     IUserService userService;
     IUserRepository userRepository;
