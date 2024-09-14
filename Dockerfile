@@ -19,6 +19,6 @@ RUN apt-get update && apt-get install -y netcat
 # RUN chmod +x /wait-for-it.sh
 
 # Command to run the JAR file old
-#ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
 #new startup command
-ENTRYPOINT ["java -jar app.jar"]
+# ENTRYPOINT ["java -jar app.jar"]
