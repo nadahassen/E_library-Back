@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 #script to wait for the mysql container to initialize before the app container starts
-COPY wait-for-it.sh /wait-for-it.sh
+# COPY wait-for-it.sh /wait-for-it.sh
 # Copy the JAR file from the target directory into the container
 COPY target/library-0.0.7.jar app.jar
 
@@ -16,9 +16,9 @@ EXPOSE 9100
 RUN apt-get update && apt-get install -y netcat
 
 #to make the wait script executable
-RUN chmod +x /wait-for-it.sh
+# RUN chmod +x /wait-for-it.sh
 
 # Command to run the JAR file old
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 #new startup command
-ENTRYPOINT ["/bin/sh", "-c", "/wait-for-it.sh mysql -- java -jar app.jar"]
+ENTRYPOINT ["java -jar app.jar"]
