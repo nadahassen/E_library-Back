@@ -43,6 +43,7 @@ public class User {
     private List<Notification> notificationlist;
 
     @OneToMany(mappedBy="user")
+    @JsonIgnore
     private List<Reservation> reservationlist;
 
     @OneToMany(mappedBy="upload")
